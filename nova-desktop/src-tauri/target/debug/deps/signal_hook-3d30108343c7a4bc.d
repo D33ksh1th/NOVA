@@ -1,0 +1,9 @@
+/Users/Deekshith.Kr/Downloads/api test/nova-desktop/src-tauri/target/debug/deps/signal_hook-3d30108343c7a4bc.d: /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/signal-hook-0.3.18/src/lib.rs /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/signal-hook-0.3.18/src/flag.rs /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/signal-hook-0.3.18/src/low_level/mod.rs /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/signal-hook-0.3.18/src/low_level/pipe.rs /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/signal-hook-0.3.18/src/low_level/signal_details.rs
+
+/Users/Deekshith.Kr/Downloads/api test/nova-desktop/src-tauri/target/debug/deps/libsignal_hook-3d30108343c7a4bc.rmeta: /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/signal-hook-0.3.18/src/lib.rs /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/signal-hook-0.3.18/src/flag.rs /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/signal-hook-0.3.18/src/low_level/mod.rs /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/signal-hook-0.3.18/src/low_level/pipe.rs /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/signal-hook-0.3.18/src/low_level/signal_details.rs
+
+/Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/signal-hook-0.3.18/src/lib.rs:
+/Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/signal-hook-0.3.18/src/flag.rs:
+/Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/signal-hook-0.3.18/src/low_level/mod.rs:
+/Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/signal-hook-0.3.18/src/low_level/pipe.rs:
+/Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/signal-hook-0.3.18/src/low_level/signal_details.rs:

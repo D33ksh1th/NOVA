@@ -1,0 +1,54 @@
+{
+  "": {
+    "swift-dependencies": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/primary.swiftdeps"
+  },
+  "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/Sources/AvatarVisualState.swift": {
+    "dependencies": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/AvatarVisualState.d",
+    "object": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/AvatarVisualState.swift.o",
+    "swiftmodule": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/AvatarVisualState~partial.swiftmodule",
+    "swift-dependencies": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/AvatarVisualState.swiftdeps",
+    "diagnostics": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/AvatarVisualState.dia"
+  },
+  "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/Sources/CompanionRootView.swift": {
+    "dependencies": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/CompanionRootView.d",
+    "object": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/CompanionRootView.swift.o",
+    "swiftmodule": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/CompanionRootView~partial.swiftmodule",
+    "swift-dependencies": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/CompanionRootView.swiftdeps",
+    "diagnostics": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/CompanionRootView.dia"
+  },
+  "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/Sources/CompanionSceneView.swift": {
+    "dependencies": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/CompanionSceneView.d",
+    "object": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/CompanionSceneView.swift.o",
+    "swiftmodule": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/CompanionSceneView~partial.swiftmodule",
+    "swift-dependencies": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/CompanionSceneView.swiftdeps",
+    "diagnostics": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/CompanionSceneView.dia"
+  },
+  "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/Sources/CompanionViewModel.swift": {
+    "dependencies": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/CompanionViewModel.d",
+    "object": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/CompanionViewModel.swift.o",
+    "swiftmodule": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/CompanionViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/CompanionViewModel.swiftdeps",
+    "diagnostics": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/CompanionViewModel.dia"
+  },
+  "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/Sources/FloatingWindow.swift": {
+    "dependencies": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/FloatingWindow.d",
+    "object": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/FloatingWindow.swift.o",
+    "swiftmodule": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/FloatingWindow~partial.swiftmodule",
+    "swift-dependencies": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/FloatingWindow.swiftdeps",
+    "diagnostics": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/FloatingWindow.dia"
+  },
+  "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/Sources/NOVACompanionApp.swift": {
+    "dependencies": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/NOVACompanionApp.d",
+    "object": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/NOVACompanionApp.swift.o",
+    "swiftmodule": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/NOVACompanionApp~partial.swiftmodule",
+    "swift-dependencies": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/NOVACompanionApp.swiftdeps",
+    "diagnostics": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/NOVACompanionApp.dia"
+  },
+  "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/Sources/avatar_event_client.swift": {
+    "dependencies": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/avatar_event_client.d",
+    "object": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/avatar_event_client.swift.o",
+    "swiftmodule": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/avatar_event_client~partial.swiftmodule",
+    "swift-dependencies": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/avatar_event_client.swiftdeps",
+    "diagnostics": "/Users/Deekshith.Kr/Downloads/api test/NOVA/apps/mac/.build/arm64-apple-macosx/debug/NOVACompanion.build/avatar_event_client.dia"
+  }
+}

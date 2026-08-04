@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Custom scrollbar ──────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
+
+/* ── Base ──────────────────────────────────────────── */
+* { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  background: #0a0d14;
+  color: #e8edf8;
+  font-family: "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Prose overrides ──────────────────────────────── */
+.prose-invert {
+  --tw-prose-body: #c4d0e8;
+  --tw-prose-headings: #e8edf8;
+  --tw-prose-code: #f97316;
+  --tw-prose-pre-bg: rgba(0,0,0,0.3);
+  --tw-prose-links: #f97316;
+}
+
+/* ── Range slider ─────────────────────────────────── */
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.12);
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #f97316;
+  cursor: pointer;
+  box-shadow: 0 0 0 3px rgba(249,115,22,0.2);
+}
+
+/* ── Tauri titlebar drag region ──────────────────── */
+[data-tauri-drag-region] {
+  -webkit-app-region: drag;
+  cursor: default;
+  user-select: none;
+}
+[data-tauri-drag-region] button,
+[data-tauri-drag-region] input,
+[data-tauri-drag-region] a {
+  -webkit-app-region: no-drag;
+}

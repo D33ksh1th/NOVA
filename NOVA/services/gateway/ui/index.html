@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOVA Companion Console</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ui-static/app.css?v=20260801h" />
+</head>
+<body>
+  <div class="bg-noise"></div>
+  <div class="aurora a1"></div>
+  <div class="aurora a2"></div>
+  <div class="beam beam-a"></div>
+  <div class="beam beam-b"></div>
+
+  <main class="shell">
+    <aside class="left-rail">
+      <div class="brand-block">
+        <p class="eyebrow">Companion Platform</p>
+        <h1>NOVA</h1>
+        <p class="subtitle">Neural Command Deck</p>
+        <div class="brand-orbit" aria-hidden="true"></div>
+      </div>
+
+      <section class="panel">
+        <h2>Session</h2>
+        <div class="meta-row"><span>Mode</span><strong id="modeText">Interactive</strong></div>
+        <div class="meta-row"><span>Backend</span><strong id="backendText">Connected</strong></div>
+        <div class="meta-row"><span>Voice State</span><strong id="voiceState">idle</strong></div>
+      </section>
+
+      <section class="panel">
+        <h2>Settings</h2>
+        <details class="settings-menu" open>
+          <summary>Voice & Interaction</summary>
+          <label class="switch-row">
+            <span>Microphone</span>
+            <input id="micToggle" type="checkbox" />
+          </label>
+          <label class="switch-row">
+            <span>Speak Back</span>
+            <input id="speakToggle" type="checkbox" checked />
+          </label>
+          <label class="switch-row">
+            <span>Hands-free Wake</span>
+            <input id="handsFreeToggle" type="checkbox" />
+          </label>
+          <label class="switch-row switch-row--stacked">
+            <span>Voice Type</span>
+            <select id="voiceModeSelect" class="voice-select">
+              <option value="human" selected>Human</option>
+              <option value="cat">Cat</option>
+            </select>
+          </label>
+
+          <label class="switch-row switch-row--stacked">
+            <span>Voice Style</span>
+            <select id="voiceStyleSelect" class="voice-select">
+              <option value="natural">Natural</option>
+              <option value="warm">Warm</option>
+              <option value="clear" selected>Clear</option>
+              <option value="excited">Excited</option>
+            </select>
+          </label>
+
+          <label class="switch-row switch-row--stacked">
+            <span>Accent Profile</span>
+            <select id="accentProfileSelect" class="voice-select">
+              <option value="indian_clear" selected>Indian English - Clear</option>
+              <option value="indian_natural">Indian English - Natural</option>
+              <option value="indian_warm">Indian English - Warm</option>
+              <option value="english_clear">English - Ultra Clear</option>
+            </select>
+          </label>
+
+          <label class="switch-row switch-row--stacked">
+            <span>Speech Rate</span>
+            <select id="voiceRateSelect" class="voice-select">
+              <option value="140">140 (ultra-slow, cat mode)</option>
+              <option value="160">160 (slower)</option>
+              <option value="176" selected>176 (clear)</option>
+              <option value="180">180 (default)</option>
+              <option value="188">188 (faster)</option>
+              <option value="190">190 (fastest)</option>
+            </select>
+          </label>
+
+          <label class="switch-row switch-row--stacked">
+            <span>Pitch</span>
+            <select id="voicePitchSelect" class="voice-select">
+              <option value="44">44 (deeper)</option>
+              <option value="50" selected>50 (default)</option>
+              <option value="56">56 (brighter)</option>
+              <option value="60">60 (cat mode)</option>
+            </select>
+          </label>
+
+          <label class="switch-row switch-row--stacked">
+            <span>Voice Model</span>
+            <select id="voiceModelSelect" class="voice-select">
+              <option value="indian_priyamvada">Indian Female - Priyamvada</option>
+              <option value="indian_pratham" selected>Indian Male - Pratham (recommended for clear English)</option>
+              <option value="indian_rohan">Indian Male - Rohan (stronger)</option>
+              <option value="english_lessac">English Neutral - Lessac (max clarity)</option>
+            </select>
+          </label>
+
+          <div id="voiceControlsNote" class="voice-controls-note">Applying backend voice controls...</div>
+
+          <div class="wake-panel">
+            <div id="wakeStatus" class="wake-status">Wake listening is off.</div>
+          </div>
+        </details>
+
+        <button id="pushToTalkBtn" class="rail-btn">Push To Talk</button>
+        <button id="stopSpeakBtn" class="rail-btn rail-btn--stop" disabled>Stop Speaking</button>
+      </section>
+
+      <section class="panel">
+        <h2>Quick Actions</h2>
+        <button class="chip" data-open-url="/companion" data-open-target="_blank">Open Web Companion</button>
+        <button class="chip" data-prompt="Create a task to build NOVA mobile UI">Create Goal</button>
+        <button class="chip" data-prompt="What is my current location?">Live Location</button>
+        <button class="chip" data-prompt="What is the current time and weather?">Time + Weather</button>
+        <button class="chip" data-prompt="Continue from where we paused yesterday.">Continue Work</button>
+      </section>
+    </aside>
+
+    <section class="chat-stage">
+      <div class="nova-cosmos" aria-hidden="true">
+        <div class="cosmos-nebula"></div>
+        <div class="core-glow"></div>
+        <div class="orbit orbit-a"></div>
+        <div class="orbit orbit-b"></div>
+        <div class="orbit orbit-c"></div>
+        <div class="orbit orbit-d"></div>
+        <span class="spark spark-1"></span>
+        <span class="spark spark-2"></span>
+        <span class="spark spark-3"></span>
+        <span class="spark spark-4"></span>
+      </div>
+
+      <header class="chat-header">
+        <div>
+          <p class="eyebrow">NOVA Control Mesh</p>
+          <h2>Coordinate goals, code, voice, and context from one command surface</h2>
+          <div class="header-badges" aria-label="Live status badges">
+            <span class="header-chip">Neural Link Active</span>
+            <span class="header-chip">Voice Matrix Ready</span>
+            <span class="header-chip">Memory Sync Stable</span>
+          </div>
+        </div>
+        <div class="pulse-dot" title="Online"></div>
+      </header>
+
+      <div id="chatLog" class="chat-log"></div>
+
+      <footer class="composer-wrap">
+        <form id="chatForm" class="composer">
+          <div class="composer-top">
+            <div class="composer-modes">
+              <button type="button" id="modeChatBtn" class="mode-btn is-active">Chat</button>
+              <button type="button" id="modeCodeBtn" class="mode-btn">Code</button>
+            </div>
+            <div class="composer-hint" id="composerHint">Enter to send</div>
+          </div>
+
+          <div class="input-pane" id="chatPane">
+            <input id="chatInput" type="text" placeholder="Ask NOVA anything. Goals, debugging, planning, or human chat..." autocomplete="off" />
+          </div>
+
+          <div class="input-pane hidden" id="codePane">
+            <textarea id="codeInput" rows="8" placeholder="Paste your code here...\n\nExample:\ndef hello():\n    print('hello')"></textarea>
+            <div class="code-actions">
+              <button type="button" class="chip chip-mini code-preset" data-code-action="fix">Fix Bugs</button>
+              <button type="button" class="chip chip-mini code-preset" data-code-action="refactor">Refactor</button>
+              <button type="button" class="chip chip-mini code-preset" data-code-action="explain">Explain</button>
+              <button type="button" class="chip chip-mini code-preset" data-code-action="optimize">Optimize</button>
+              <button type="button" class="chip chip-mini code-preset" data-code-action="tests">Add Tests</button>
+            </div>
+          </div>
+
+          <button type="submit" id="sendBtn">Send</button>
+        </form>
+      </footer>
+    </section>
+  </main>
+
+  <template id="messageTemplate">
+    <article class="msg">
+      <div class="avatar"></div>
+      <div class="bubble">
+        <p class="role"></p>
+        <p class="text"></p>
+        <div class="meta"></div>
+      </div>
+    </article>
+  </template>
+
+  <script src="/ui-static/app.js?v=20260731t"></script>
+</body>
+</html>

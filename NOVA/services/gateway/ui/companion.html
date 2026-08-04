@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOVA Web Companion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ui-static/companion.css?v=20260731a" />
+</head>
+<body>
+  <div class="bg"></div>
+
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <p class="label">Browser Companion</p>
+        <h1>NOVA Cat</h1>
+        <p class="sub" id="connectionText">Connecting to avatar stream...</p>
+      </div>
+      <div class="chips">
+        <span class="chip" id="stateChip">idle</span>
+        <span class="chip chip-soft" id="eventChip">snapshot</span>
+      </div>
+    </header>
+
+    <section class="stage-wrap">
+      <div class="stage" id="stage">
+          <div class="media-avatar hidden" id="mediaAvatar" data-state="idle">
+            <video id="catVideo" autoplay loop muted playsinline></video>
+            <img id="catImage" alt="Cat avatar" />
+          </div>
+
+        <div class="cat" id="cat">
+            <div class="tail-base"><div class="tail-tip"></div></div>
+
+            <div class="hind-leg hind-left"><div class="paw"></div></div>
+            <div class="hind-leg hind-right"><div class="paw"></div></div>
+
+            <div class="torso"></div>
+            <div class="chest"></div>
+            <div class="neck-fur"></div>
+
+            <div class="front-leg front-left"><div class="paw"></div></div>
+            <div class="front-leg front-right"><div class="paw"></div></div>
+
+            <div class="head-wrap" id="head">
+              <div class="ear ear-l"><span class="ear-inner"></span></div>
+              <div class="ear ear-r"><span class="ear-inner"></span></div>
+
+              <div class="head">
+                <div class="brow brow-l"></div>
+                <div class="brow brow-r"></div>
+
+                <div class="eye eye-l">
+                  <div class="iris"><div class="pupil" id="pupilL"></div></div>
+                  <div class="lid"></div>
+                </div>
+
+                <div class="eye eye-r">
+                  <div class="iris"><div class="pupil" id="pupilR"></div></div>
+                  <div class="lid"></div>
+                </div>
+
+                <div class="muzzle"></div>
+                <div class="nose"></div>
+
+                <div class="whiskers whiskers-l">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="whiskers whiskers-r">
+                  <span></span><span></span><span></span>
+                </div>
+
+                <div class="mouth">
+                  <span class="mouth-l"></span>
+                  <span class="mouth-r"></span>
+                </div>
+              </div>
+          </div>
+
+            <div class="shadow"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="controls">
+      <div class="group">
+        <h2>Avatar State</h2>
+        <div class="row">
+          <button data-event="listening_started">Listening</button>
+          <button data-event="thinking_started">Thinking</button>
+          <button data-event="speaking_started">Speaking</button>
+          <button data-event="idle">Idle</button>
+        </div>
+      </div>
+
+      <div class="group">
+        <h2>Interact</h2>
+        <div class="row">
+          <button id="loadMediaBtn">Load Real Cat Media</button>
+          <button id="useBuiltInBtn">Use Built-in Cat</button>
+          <button id="petBtn">Pet Cat</button>
+          <button id="resetViewBtn">Reset Look</button>
+        </div>
+        <input id="mediaInput" class="hidden" type="file" accept="image/*,video/*" />
+      </div>
+
+      <div class="group">
+        <h2>Talk Through Voice Pipeline</h2>
+        <form id="talkForm" class="talk-form">
+          <input id="talkInput" type="text" placeholder="Say something to NOVA..." autocomplete="off" />
+          <label class="check"><input type="checkbox" id="speakBack" checked /> Speak back</label>
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="/ui-static/companion.js?v=20260731a"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nova"
+version = "0.1.0"
+description = "Offline First AI Companion"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+    { name = "Deekshith KR" }
+]
+
+dependencies = [
+    "fastapi>=0.116.0",
+    "uvicorn[standard]>=0.35.0",
+    "pydantic>=2.11.0",
+    "pydantic-settings>=2.10.0",
+    "sqlalchemy>=2.0.0",
+    "structlog>=25.4.0",
+    "python-dotenv>=1.1.0",
+    "geocoder>=1.38.1",
+    "typer>=0.16.0",
+    "rich>=14.1.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.4.0",
+    "pytest-cov>=6.2.0",
+    "black>=25.1.0",
+    "ruff>=0.12.0",
+    "mypy>=1.17.0"
+]
+
+# Install all Phase 2 ML deps at once:  pip install -e .[phase2]
+phase2 = [
+    # STT
+    # whisper.cpp binary installed separately (brew install whisper-cpp)
+    # VAD
+    "torch>=2.3.0",
+    "torchaudio>=2.3.0",
+    # Wake word
+    "openwakeword>=0.6.0",
+    # Speaker recognition
+    "resemblyzer>=0.1.1.dev0",
+    "numpy>=1.26.0",
+    # Emotion detection
+    "transformers>=4.41.0",
+    # Audio I/O
+    "soundfile>=0.12.1",
+    "sounddevice>=0.4.6",
+    # OCR / vision
+    "paddleocr>=2.7.3",
+    "pillow>=10.4.0",
+    "opencv-python>=4.10.0",
+    # Automation
+    "playwright>=1.44.0",
+    # Memory / RAG
+    "qdrant-client>=1.9.0",
+    "sentence-transformers>=3.0.0",
+]
+
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true

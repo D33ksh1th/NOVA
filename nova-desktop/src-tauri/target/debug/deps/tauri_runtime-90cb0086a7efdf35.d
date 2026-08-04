@@ -1,0 +1,9 @@
+/Users/Deekshith.Kr/Downloads/api test/nova-desktop/src-tauri/target/debug/deps/tauri_runtime-90cb0086a7efdf35.d: /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-runtime-2.11.3/src/lib.rs /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-runtime-2.11.3/src/dpi.rs /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-runtime-2.11.3/src/monitor.rs /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-runtime-2.11.3/src/webview.rs /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-runtime-2.11.3/src/window.rs
+
+/Users/Deekshith.Kr/Downloads/api test/nova-desktop/src-tauri/target/debug/deps/libtauri_runtime-90cb0086a7efdf35.rmeta: /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-runtime-2.11.3/src/lib.rs /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-runtime-2.11.3/src/dpi.rs /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-runtime-2.11.3/src/monitor.rs /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-runtime-2.11.3/src/webview.rs /Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-runtime-2.11.3/src/window.rs
+
+/Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-runtime-2.11.3/src/lib.rs:
+/Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-runtime-2.11.3/src/dpi.rs:
+/Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-runtime-2.11.3/src/monitor.rs:
+/Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-runtime-2.11.3/src/webview.rs:
+/Users/Deekshith.Kr/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-runtime-2.11.3/src/window.rs:
