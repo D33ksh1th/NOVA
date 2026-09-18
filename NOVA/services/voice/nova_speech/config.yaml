@@ -1,0 +1,125 @@
+# NOVA Speech Layer Configuration
+# All tunables for the JARVIS-style voice assistant
+
+wake_word:
+  engine: "openwakeword"
+  model: "hey_nova"  # custom model trained via synthetic-data notebook
+  threshold: 0.6
+  refractory_period_s: 2.0
+  chime_path: "./assets/sounds/chime_confirm.wav"
+  chime_duration_ms: 180
+
+vad:
+  engine: "silero"
+  trailing_silence_ms: 700
+  hard_cap_s: 12
+  sample_rate: 16000
+
+stt:
+  engine: "faster-whisper"
+  model: "small.en"
+  compute_type: "int8"
+  device: "cpu"
+  language: "en"
+  beam_size: 5
+
+brain:
+  engine: "ollama"
+  model: "gemma3:12b"
+  url: "http://127.0.0.1:11434"
+  timeout_s: 30
+  max_retries: 2
+
+tts:
+  engine: "kokoro-onnx"
+  model_path: "./models/kokoro/kokoro-v1.0.onnx"
+  voices_path: "./models/kokoro/voices-v1.0.bin"
+  sample_rate: 24000
+  cache_dir: "./cache/tts"
+  # Voice profiles
+  profiles:
+    jarvis:
+      voice: "bm_george"
+      speed: 1.0
+      blend:
+        - voice: "bm_george"
+          weight: 0.7
+        - voice: "bm_fable"
+          weight: 0.3
+    friday:
+      voice: "bf_emma"
+      speed: 1.05
+      blend:
+        - voice: "bf_emma"
+          weight: 1.0
+  active_profile: "jarvis"
+
+fx:
+  enabled: true
+  chain:
+    highpass_hz: 110
+    presence_eq:
+      freq_hz: 4000
+      gain_db: 2.5
+      q: 1.2
+    high_shelf:
+      freq_hz: 8000
+      gain_db: -1.5
+    compressor:
+      ratio: 3.0
+      threshold_db: -18
+      attack_ms: 8
+      release_ms: 120
+    reverb:
+      room_size: 0.25
+      wet: 0.10
+    loudness:
+      target_lufs: -16
+      true_peak_dbtp: -1.0
+
+greetings:
+  cache_dir: "./cache/greetings"
+  history_size: 5  # don't repeat last N greetings
+  max_playback_latency_ms: 250
+
+emotions:
+  neutral:
+    speed_multiplier: 1.00
+    pause_before_ms: 200
+    rewrite: null
+  warm:
+    speed_multiplier: 0.97
+    pause_before_ms: 250
+    rewrite: "soften"
+  amused:
+    speed_multiplier: 1.06
+    pause_before_ms: 150
+    rewrite: "punchline_pause"
+  urgent:
+    speed_multiplier: 1.14
+    pause_before_ms: 0
+    rewrite: "strip_subordinate"
+  serious:
+    speed_multiplier: 0.92
+    pause_before_ms: 400
+    rewrite: "em_dash"
+  concerned:
+    speed_multiplier: 0.94
+    pause_before_ms: 350
+    rewrite: null
+  confident:
+    speed_multiplier: 1.03
+    pause_before_ms: 200
+    rewrite: null
+
+transport:
+  host: "127.0.0.1"
+  port: 9600
+  protocol: "websocket"
+
+logging:
+  level: "INFO"
+  journal: true
+  transcript_file: "./logs/transcripts.log"
+  transcript_perms: "0600"
+  transcript_rotation_days: 7

@@ -1,0 +1,32 @@
+[Unit]
+Description=NOVA Speech Layer — JARVIS-style Voice Assistant
+After=network.target ollama.service
+Wants=ollama.service
+
+[Service]
+Type=simple
+User=nova
+Group=nova
+WorkingDirectory=/opt/nova
+ExecStart=/opt/nova/venv/bin/python -m nova_speech.cli start --config /opt/nova/config.yaml
+Restart=on-failure
+RestartSec=5
+
+# Security hardening
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/opt/nova/cache /opt/nova/logs
+PrivateTmp=yes
+
+# Logging to journald
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=nova-voice
+
+# Resource limits
+MemoryMax=4G
+CPUQuota=80%
+
+[Install]
+WantedBy=multi-user.target

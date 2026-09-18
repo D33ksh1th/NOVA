@@ -1,0 +1,2 @@
+capabilities: [web.read, net.egress]
+allowed_tools: [web_page_tool]

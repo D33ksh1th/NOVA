@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOVA Companion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ui-static/companion2.css?v=2" />
+  <link rel="stylesheet" href="/ui-static/nova-shell.css" />
+</head>
+<body>
+  <div class="fx-grid"></div>
+  <div class="fx-scan"></div>
+  <!-- ambient glows -->
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+  <div class="glow g3"></div>
+
+  <div class="layout">
+
+    <!-- LEFT: avatar stage -->
+    <aside class="avatar-panel">
+      <div class="avatar-header">
+        <div class="av-badge">
+          <span class="av-dot" id="avDot"></span>
+          <span id="stateLabel">idle</span>
+        </div>
+        <div class="av-chips">
+          <span class="tag" id="wakeTag">wake: off</span>
+          <span class="tag tag-mic" id="micTag">mic: off</span>
+        </div>
+      </div>
+
+      <div class="stage" id="stage">
+        <!-- real-media overlay -->
+        <div class="media-layer hidden" id="mediaLayer" data-state="idle">
+          <video id="catVideo" autoplay loop muted playsinline></video>
+          <img id="catImage" alt="Cat" />
+        </div>
+
+        <!-- built-in animated cat -->
+        <div class="cat" id="cat" data-state="idle">
+
+          <!-- fur texture dots (CSS) -->
+          <div class="fur-layer"></div>
+
+          <div class="tail-base"><div class="tail-mid"><div class="tail-tip"></div></div></div>
+
+          <div class="hind hind-l"><div class="hind-paw"></div></div>
+          <div class="hind hind-r"><div class="hind-paw"></div></div>
+
+          <div class="body">
+            <div class="belly"></div>
+          </div>
+
+          <div class="front front-l"><div class="front-paw"></div></div>
+          <div class="front front-r"><div class="front-paw"></div></div>
+
+          <div class="neck"></div>
+
+          <div class="head-group" id="headGroup">
+            <div class="ear ear-l"><div class="ear-inner"></div></div>
+            <div class="ear ear-r"><div class="ear-inner"></div></div>
+
+            <div class="head">
+              <!-- fur stripes on forehead -->
+              <div class="stripe s1"></div>
+              <div class="stripe s2"></div>
+              <div class="stripe s3"></div>
+
+              <div class="eye-container eye-l">
+                <div class="eye-white">
+                  <div class="iris iris-l">
+                    <div class="pupil" id="pupilL"></div>
+                    <div class="eye-shine"></div>
+                  </div>
+                </div>
+                <div class="eyelid lid-l"></div>
+              </div>
+
+              <div class="eye-container eye-r">
+                <div class="eye-white">
+                  <div class="iris iris-r">
+                    <div class="pupil" id="pupilR"></div>
+                    <div class="eye-shine"></div>
+                  </div>
+                </div>
+                <div class="eyelid lid-r"></div>
+              </div>
+
+              <div class="brow brow-l"></div>
+              <div class="brow brow-r"></div>
+
+              <div class="muzzle">
+                <div class="nose-bridge"></div>
+                <div class="nose"></div>
+                <div class="philtrum"></div>
+                <div class="mouth">
+                  <span class="m-l"></span>
+                  <span class="m-r"></span>
+                </div>
+                <div class="chin-dot d1"></div>
+                <div class="chin-dot d2"></div>
+                <div class="chin-dot d3"></div>
+              </div>
+
+              <!-- whisker pads -->
+              <div class="whisker-pad pad-l">
+                <div class="whisker w1"></div>
+                <div class="whisker w2"></div>
+                <div class="whisker w3"></div>
+              </div>
+              <div class="whisker-pad pad-r">
+                <div class="whisker w1"></div>
+                <div class="whisker w2"></div>
+                <div class="whisker w3"></div>
+              </div>
+            </div>
+          </div><!-- /head-group -->
+
+          <div class="ground-shadow"></div>
+        </div><!-- /cat -->
+
+        <!-- speaking waveform ring -->
+        <div class="voice-ring" id="voiceRing"></div>
+      </div><!-- /stage -->
+
+      <div class="av-footer">
+        <button class="av-btn" id="petBtn" title="Pet the cat">🐾 Pet</button>
+        <button class="av-btn" id="loadMediaBtn" title="Load a real cat photo/video">📷 Real Cat</button>
+        <button class="av-btn av-btn-ghost" id="useBuiltinBtn" title="Switch back to animated cat">↩ Animated</button>
+        <input id="mediaInput" type="file" accept="image/*,video/*" class="sr-only" />
+      </div>
+    </aside>
+
+    <!-- CENTER: chat window -->
+    <section class="chat-panel">
+      <header class="chat-header">
+        <div>
+          <p class="eyebrow">NOVA</p>
+          <h1>Companion Chat</h1>
+          <nav class="nova-nav" aria-label="NOVA views"><a href="/app">Chat</a><a href="/agents">Agents</a><a href="/companion" aria-current="page">Companion</a></nav>
+        </div>
+        <div class="chat-header-right">
+          <span class="status-dot" id="connDot"></span>
+          <span id="connText">Connecting…</span>
+        </div>
+      </header>
+
+      <div class="chat-log" id="chatLog"></div>
+
+      <footer class="composer">
+        <div class="composer-row">
+          <button type="button" class="icon-btn" id="micBtn" title="Push to talk">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+              <line x1="12" y1="19" x2="12" y2="23"/>
+              <line x1="8" y1="23" x2="16" y2="23"/>
+            </svg>
+          </button>
+          <input id="chatInput" type="text" placeholder='Ask NOVA anything… or say "hey nova"' autocomplete="off" />
+          <button type="button" class="send-btn" id="sendBtn">Ask</button>
+        </div>
+        <div class="composer-hints">
+          <span id="micStatus">Mic off</span>
+          <span id="typingIndicator" class="hidden">NOVA is thinking…</span>
+        </div>
+      </footer>
+    </section>
+
+    <!-- RIGHT: settings drawer -->
+    <aside class="settings-panel" id="settingsPanel">
+      <header class="settings-header">
+        <h2>Settings</h2>
+        <button class="icon-btn" id="settingsClose" title="Close settings">✕</button>
+      </header>
+
+      <div class="settings-scroll">
+
+        <!-- Wake word -->
+        <div class="s-section">
+          <h3>Wake Word</h3>
+          <label class="toggle-row">
+            <span>Hands-free Mode</span>
+            <label class="tog">
+              <input type="checkbox" id="handsFreeToggle" />
+              <span class="tog-track"></span>
+            </label>
+          </label>
+          <label class="toggle-row">
+            <span>Microphone</span>
+            <label class="tog">
+              <input type="checkbox" id="micToggle" />
+              <span class="tog-track"></span>
+            </label>
+          </label>
+          <p class="s-hint">Say <strong>hey nova</strong>, <strong>ok nova</strong> or just <strong>nova</strong> to start a voice conversation.</p>
+          <div class="wake-status-box" id="wakeStatusBox">Wake listening is off.</div>
+        </div>
+
+        <!-- Voice -->
+        <div class="s-section">
+          <h3>Voice</h3>
+          <label class="toggle-row">
+            <span>Speak Back</span>
+            <label class="tog">
+              <input type="checkbox" id="speakToggle" checked />
+              <span class="tog-track"></span>
+            </label>
+          </label>
+
+          <label class="s-field">
+            <span>Voice Mode</span>
+            <select id="voiceModeSelect">
+              <option value="human" selected>Human</option>
+              <option value="cat">Cat</option>
+            </select>
+          </label>
+          <label class="s-field">
+            <span>Voice Style</span>
+            <select id="voiceStyleSelect">
+              <option value="natural">Natural</option>
+              <option value="warm">Warm</option>
+              <option value="clear" selected>Clear</option>
+              <option value="excited">Excited</option>
+            </select>
+          </label>
+          <label class="s-field">
+            <span>Accent</span>
+            <select id="accentProfileSelect">
+              <option value="indian_clear" selected>Indian English — Clear</option>
+              <option value="indian_natural">Indian English — Natural</option>
+              <option value="indian_warm">Indian English — Warm</option>
+              <option value="english_clear">English — Ultra Clear</option>
+            </select>
+          </label>
+          <label class="s-field">
+            <span>Speech Rate</span>
+            <select id="voiceRateSelect">
+              <option value="140">140 — Ultra slow</option>
+              <option value="160">160 — Slower</option>
+              <option value="176" selected>176 — Clear</option>
+              <option value="180">180 — Default</option>
+              <option value="188">188 — Faster</option>
+            </select>
+          </label>
+          <label class="s-field">
+            <span>Pitch</span>
+            <select id="voicePitchSelect">
+              <option value="44">44 — Deeper</option>
+              <option value="50" selected>50 — Default</option>
+              <option value="56">56 — Brighter</option>
+              <option value="60">60 — Cat mode</option>
+            </select>
+          </label>
+          <label class="s-field">
+            <span>Voice Model</span>
+            <select id="voiceModelSelect">
+              <option value="indian_priyamvada">Indian Female — Priyamvada</option>
+              <option value="indian_pratham" selected>Indian Male — Pratham</option>
+              <option value="indian_rohan">Indian Male — Rohan</option>
+              <option value="english_lessac">English Neutral — Lessac</option>
+            </select>
+          </label>
+          <div class="s-note" id="voiceNote">Sync with backend…</div>
+          <button class="s-btn" id="syncVoiceBtn">Apply Voice Settings</button>
+          <button class="s-btn s-btn-stop" id="stopSpeakBtn" disabled>Stop Speaking</button>
+        </div>
+
+        <!-- Avatar -->
+        <div class="s-section">
+          <h3>Avatar State (debug)</h3>
+          <div class="state-btns">
+            <button class="state-btn" data-event="listening_started">Listening</button>
+            <button class="state-btn" data-event="thinking_started">Thinking</button>
+            <button class="state-btn" data-event="speaking_started">Speaking</button>
+            <button class="state-btn" data-event="idle">Idle</button>
+          </div>
+        </div>
+
+        <!-- About -->
+        <div class="s-section">
+          <h3>About</h3>
+          <p class="s-hint">NOVA Companion — Advanced Gen AI assistant.<br>All voice, chat, code, and memory features in one place.</p>
+          <button class="s-btn" id="openConsoleBtn">Open Full Console</button>
+        </div>
+      </div>
+    </aside>
+  </div><!-- /layout -->
+
+  <!-- Settings toggle button (floating) -->
+  <button class="fab-settings" id="fabSettings" title="Settings">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+    </svg>
+  </button>
+
+  <script src="/ui-static/companion2.js?v=1"></script>
+</body>
+</html>

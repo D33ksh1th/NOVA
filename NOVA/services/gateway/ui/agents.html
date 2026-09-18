@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>NOVA | Agent Monitor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/ui-static/agents.css">
+  <link rel="stylesheet" href="/ui-static/nova-shell.css">
+  <script src="/ui-static/lucide.min.js" defer></script>
+  <script src="/ui-static/agents.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/agents" aria-label="NOVA Agent Monitor"><i data-lucide="orbit" aria-hidden="true"></i>NOVA</a>
+    <nav class="nova-nav" aria-label="NOVA views"><a href="/app">Chat</a><a href="/agents" aria-current="page">Agents</a><a href="/companion">Companion</a></nav>
+    <span class="read-only"><i data-lucide="shield-check" aria-hidden="true"></i>Read only</span>
+    <span class="connection" id="connection" role="status"><span class="signal"></span><span id="connection-label">Connecting</span></span>
+    <button class="icon-button" id="refresh" aria-label="Refresh status" title="Refresh status"><i data-lucide="refresh-cw" aria-hidden="true"></i></button>
+  </header>
+
+  <main class="workspace">
+    <aside class="run-rail" aria-label="Graph runs">
+      <div class="rail-heading"><h2>Runs</h2><span id="run-count" class="count">0</span></div>
+      <label class="search"><i data-lucide="search" aria-hidden="true"></i><input id="run-search" type="search" placeholder="Find a run" aria-label="Find a run"></label>
+      <div class="run-list" id="run-list"><p class="rail-empty">Waiting for status</p></div>
+      <section class="runtime-block">
+        <div class="rail-heading"><h2>Runtime</h2><i data-lucide="cpu" aria-hidden="true"></i></div>
+        <dl><div><dt>State</dt><dd id="runtime-state">Unknown</dd></div><div><dt>Agents registered</dt><dd id="agent-count">--</dd></div></dl>
+        <div id="agent-registry"></div>
+      </section>
+    </aside>
+
+    <section class="monitor" aria-label="Selected run">
+      <div id="alert" class="alert" role="alert" hidden></div>
+      <div class="monitor-heading">
+        <div><p class="eyebrow">Neural Command Deck / <span id="run-id">No run selected</span></p><h1 id="run-title">Agent activity</h1></div>
+        <span id="run-status" class="badge" hidden></span>
+      </div>
+      <section class="agent-command" aria-label="NOVA agent conversation">
+        <div class="command-heading"><h2>NOVA</h2><div class="command-tools">
+          <button class="icon-button" id="speak-updates" type="button" aria-pressed="false" title="Speak task updates" aria-label="Speak task updates"><i data-lucide="volume-2" aria-hidden="true"></i></button>
+          <button class="icon-button" id="ask-status" title="Ask NOVA for agent status" aria-label="Ask NOVA for agent status"><i data-lucide="activity" aria-hidden="true"></i></button>
+          <button class="icon-button" id="ask-results" title="Ask NOVA for agent findings" aria-label="Ask NOVA for agent findings"><i data-lucide="file-search" aria-hidden="true"></i></button>
+          <button class="icon-button stop-button" id="stop-agents" title="Stop all agents" aria-label="Stop all agents" disabled><i data-lucide="square" aria-hidden="true"></i></button>
+        </div></div>
+        <form id="research-form" class="research-form">
+          <label class="sr-only" for="research-topic">Research topic</label>
+          <input id="research-topic" name="topic" maxlength="400" required placeholder="Research topic" autocomplete="off">
+          <button class="icon-button" id="start-research" type="submit" title="Start read-only research" aria-label="Start read-only research" disabled><i data-lucide="arrow-up" aria-hidden="true"></i></button>
+        </form>
+        <p id="nova-reply" class="nova-reply" role="status">Connecting to NOVA.</p>
+      </section>
+      <div class="metrics" aria-label="Run metrics">
+        <div><span>Tasks finished</span><strong id="finished">--</strong></div>
+        <div><span>Successful</span><strong id="successful">--</strong></div>
+        <div><span>In progress</span><strong id="in-progress">--</strong></div>
+        <div><span>Elapsed</span><strong id="elapsed">--</strong></div>
+      </div>
+      <div class="progress-section">
+        <p id="task-announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+        <div class="progress-label"><span>Run progress</span><strong id="progress-label">--</strong></div>
+        <progress id="progress" max="100" value="0" aria-label="Percentage of tasks finished"></progress>
+      </div>
+      <div class="task-toolbar">
+        <h2>Tasks <span id="task-count" class="count">0</span></h2>
+        <div class="task-tools">
+          <label class="search"><i data-lucide="search" aria-hidden="true"></i><input id="task-search" type="search" placeholder="Find a task" aria-label="Find a task"></label>
+          <label class="filter"><span class="sr-only">Task state</span><select id="task-filter" aria-label="Task state"><option value="all">All states</option><option value="active">In progress</option><option value="queued">Queued</option><option value="finished">Finished</option><option value="issues">Needs attention</option></select></label>
+        </div>
+      </div>
+      <div id="empty" class="empty-state">
+        <i data-lucide="workflow" aria-hidden="true"></i><h2 id="empty-title">Waiting for runtime status</h2><p id="empty-description">Connecting to the local monitor.</p>
+      </div>
+      <div id="task-table" class="task-table" role="table" aria-label="Agent tasks" hidden>
+        <div class="task-row table-heading" role="row"><span role="columnheader">Task / agent</span><span role="columnheader">State</span><span role="columnheader">Attempt</span><span role="columnheader">Dependencies</span><span></span></div>
+        <div id="task-rows" role="rowgroup"></div>
+      </div>
+      <footer class="monitor-footer"><span><span class="signal"></span>Local runtime</span><span id="updated">No snapshot received</span></footer>
+    </section>
+  </main>
+
+  <dialog id="task-detail" aria-labelledby="detail-title">
+    <div class="detail-heading"><span class="eyebrow">Task inspection</span><button class="icon-button" id="close-detail" title="Close details" aria-label="Close details"><i data-lucide="x" aria-hidden="true"></i></button></div>
+    <h2 id="detail-title"></h2><span id="detail-state" class="badge"></span>
+    <dl id="detail-fields"></dl>
+  </dialog>
+  <dialog id="stop-confirm" aria-labelledby="stop-title">
+    <h2 id="stop-title">Stop all agents?</h2>
+    <p class="nova-reply">Active work will be cancelled. New runs remain blocked until the backend restarts.</p>
+    <form method="dialog" class="confirm-actions"><button value="cancel">Keep running</button><button value="stop" class="stop-button">Stop agents</button></form>
+  </dialog>
+  <noscript><p class="alert">JavaScript is required to retrieve runtime status.</p></noscript>
+</body>
+</html>

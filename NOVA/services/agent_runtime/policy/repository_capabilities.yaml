@@ -1,0 +1,14 @@
+repo_reader:
+  max_risk: READ_ONLY
+  capabilities: [repo.read]
+  allowed_tools: [repository_read_tool]
+  denied_tools: ["*"]
+  resource_scopes:
+    repository: nova-desktop
+  concurrency_limit: 1
+  default_budget:
+    wall_clock_ms: 120000
+    max_tool_calls: 3
+    max_llm_tokens: 16000
+    max_usd: 0
+    max_retries: 0

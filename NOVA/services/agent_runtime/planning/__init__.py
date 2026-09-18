@@ -1,0 +1,1 @@
+"""Model proposals validated before runtime execution."""

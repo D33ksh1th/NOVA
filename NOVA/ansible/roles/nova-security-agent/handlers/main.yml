@@ -1,0 +1,8 @@
+- name: Reload systemd
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Restart nova security agent
+  ansible.builtin.systemd:
+    name: "{{ nova_agent_service_name }}"
+    state: restarted

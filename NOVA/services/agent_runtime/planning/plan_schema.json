@@ -1,0 +1,275 @@
+{
+  "$defs": {
+    "Budget": {
+      "additionalProperties": false,
+      "properties": {
+        "max_llm_tokens": {
+          "minimum": 0,
+          "title": "Max Llm Tokens",
+          "type": "integer"
+        },
+        "max_retries": {
+          "minimum": 0,
+          "title": "Max Retries",
+          "type": "integer"
+        },
+        "max_tool_calls": {
+          "minimum": 0,
+          "title": "Max Tool Calls",
+          "type": "integer"
+        },
+        "max_usd": {
+          "minimum": 0,
+          "title": "Max Usd",
+          "type": "number"
+        },
+        "wall_clock_ms": {
+          "exclusiveMinimum": 0,
+          "title": "Wall Clock Ms",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "wall_clock_ms",
+        "max_tool_calls",
+        "max_llm_tokens",
+        "max_usd",
+        "max_retries"
+      ],
+      "title": "Budget",
+      "type": "object"
+    },
+    "Edge": {
+      "additionalProperties": false,
+      "properties": {
+        "on_failure": {
+          "$ref": "#/$defs/FailureMode"
+        },
+        "task_id": {
+          "minLength": 1,
+          "title": "Task Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "task_id",
+        "on_failure"
+      ],
+      "title": "Edge",
+      "type": "object"
+    },
+    "FailureMode": {
+      "enum": [
+        "FAIL_GRAPH",
+        "SKIP_DOWNSTREAM",
+        "CONTINUE"
+      ],
+      "title": "FailureMode",
+      "type": "string"
+    },
+    "Node": {
+      "additionalProperties": false,
+      "properties": {
+        "agent": {
+          "title": "Agent",
+          "type": "string"
+        },
+        "budget": {
+          "$ref": "#/$defs/Budget"
+        },
+        "capabilities": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Capabilities",
+          "type": "array"
+        },
+        "consumes": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/OutputBinding"
+          },
+          "title": "Consumes",
+          "type": "array"
+        },
+        "depends_on": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Edge"
+          },
+          "title": "Depends On",
+          "type": "array"
+        },
+        "description": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 80,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "objective": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Objective",
+          "type": "string"
+        },
+        "priority": {
+          "default": 0,
+          "maximum": 10,
+          "minimum": 0,
+          "title": "Priority",
+          "type": "integer"
+        },
+        "files": {
+          "default": [],
+          "items": {"type": "string"},
+          "maxItems": 3,
+          "title": "Files",
+          "type": "array"
+        },
+        "repository": {
+          "anyOf": [{"const": "nova-desktop", "type": "string"}, {"type": "null"}],
+          "default": null,
+          "title": "Repository"
+        },
+        "retry": {
+          "$ref": "#/$defs/RetryPolicy"
+        },
+        "risk": {
+          "$ref": "#/$defs/RiskTier"
+        },
+        "skills": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Skills",
+          "type": "array"
+        },
+        "tools": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Tools",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "agent",
+        "description",
+        "objective",
+        "capabilities",
+        "risk",
+        "budget"
+      ],
+      "title": "Node",
+      "type": "object"
+    },
+    "OutputBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "input_key": {
+          "minLength": 1,
+          "title": "Input Key",
+          "type": "string"
+        },
+        "key": {
+          "minLength": 1,
+          "title": "Key",
+          "type": "string"
+        },
+        "task_id": {
+          "minLength": 1,
+          "title": "Task Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "task_id",
+        "key",
+        "input_key"
+      ],
+      "title": "OutputBinding",
+      "type": "object"
+    },
+    "RetryPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "base_delay_ms": {
+          "default": 100,
+          "maximum": 10000,
+          "minimum": 0,
+          "title": "Base Delay Ms",
+          "type": "integer"
+        },
+        "max_attempts": {
+          "default": 1,
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Max Attempts",
+          "type": "integer"
+        },
+        "max_delay_ms": {
+          "default": 1000,
+          "maximum": 30000,
+          "minimum": 0,
+          "title": "Max Delay Ms",
+          "type": "integer"
+        }
+      },
+      "title": "RetryPolicy",
+      "type": "object"
+    },
+    "RiskTier": {
+      "enum": [
+        "READ_ONLY",
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ],
+      "title": "RiskTier",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "budget": {
+      "$ref": "#/$defs/Budget"
+    },
+    "goal": {
+      "maxLength": 2048,
+      "minLength": 1,
+      "title": "Goal",
+      "type": "string"
+    },
+    "nodes": {
+      "items": {
+        "$ref": "#/$defs/Node"
+      },
+      "maxItems": 32,
+      "minItems": 1,
+      "title": "Nodes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "goal",
+    "budget",
+    "nodes"
+  ],
+  "title": "GraphPlan",
+  "type": "object"
+}

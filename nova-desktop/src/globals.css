@@ -1,0 +1,112 @@
+@config "../tailwind.config.cjs";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --nova-surface: #17181b;
+  --nova-ink: #f1f0ec;
+  --nova-mustard: #d8b142;
+  --nova-amber: #e8c976;
+  --nova-coral: #e89582;
+  --nova-line: rgba(222, 223, 230, 0.13);
+}
+
+/* ── Custom scrollbar ──────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
+
+/* ── Base ──────────────────────────────────────────── */
+* { box-sizing: border-box; letter-spacing: 0 !important; }
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  background: var(--nova-surface);
+  color: var(--nova-ink);
+  font-family: "Outfit", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Prose overrides ──────────────────────────────── */
+.prose-invert {
+  --tw-prose-body: #b9bbc5;
+  --tw-prose-headings: #f1f0ec;
+  --tw-prose-code: #e8c976;
+  --tw-prose-pre-bg: rgba(0,0,0,0.3);
+  --tw-prose-links: #83b4e8;
+}
+
+/* ── Range slider ─────────────────────────────────── */
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.12);
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--nova-mustard);
+  cursor: pointer;
+  box-shadow: 0 0 0 3px rgba(216,177,66,0.15);
+}
+
+::selection { background: #d8b14240; color: #ffffff; }
+:focus-visible { outline: 2px solid var(--nova-mustard); outline-offset: 3px; }
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+button, select, input, textarea { transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease; }
+button[class*="bg-nova-orange"]:not([class*="bg-nova-orange/"]) { color: #211d11; }
+.nova-shell { background: linear-gradient(115deg, #d8b14206, transparent 35%, #83b4e806), var(--nova-surface); }
+.nova-workspace { isolation: isolate; }
+.nova-workspace::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(#dedfe603 1px, transparent 1px), linear-gradient(90deg, #dedfe603 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: -1;
+}
+.nova-view > * { animation: nova-arrive 420ms cubic-bezier(.2,.8,.2,1) both; }
+.nova-sidebar button { border-radius: 6px; }
+@media (max-width: 639px) {
+  .nova-sidebar { width: 64px !important; }
+}
+.nova-panel-heading { font-size: 11px; text-transform: uppercase; color: #8d909f; font-weight: 500; }
+.nova-quick-action { display: inline-flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1px solid var(--nova-line); border-radius: 6px; color: #b9bbc5; font-size: 12px; }
+.nova-quick-action:hover { color: var(--nova-mustard); border-color: #d8b14270; background: #d8b1420c; }
+.nova-activity-bars { display: inline-flex; align-items: center; gap: 3px; height: 20px; }
+.nova-activity-bars span { width: 3px; height: 5px; border-radius: 1px; background: currentColor; }
+.nova-activity-bars[data-active="true"] span { animation: nova-signal 950ms ease-in-out infinite alternate; }
+.nova-activity-bars span:nth-child(2) { animation-delay: -270ms; }
+.nova-activity-bars span:nth-child(3) { animation-delay: -510ms; }
+.nova-activity-bars span:nth-child(4) { animation-delay: -180ms; }
+@keyframes nova-signal { from { height: 4px; } to { height: 18px; } }
+@keyframes nova-arrive { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* ── Tauri titlebar drag region ──────────────────── */
+[data-tauri-drag-region] {
+  -webkit-app-region: drag;
+  cursor: default;
+  user-select: none;
+}
+[data-tauri-drag-region] button,
+[data-tauri-drag-region] input,
+[data-tauri-drag-region] a {
+  -webkit-app-region: no-drag;
+}

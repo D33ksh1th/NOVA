@@ -1,0 +1,106 @@
+---
+# NOVA Speech Layer — Ansible Role
+# Installs and configures the fully-local voice assistant
+
+- name: Create nova user
+  ansible.builtin.user:
+    name: nova
+    system: yes
+    shell: /usr/sbin/nologin
+    home: /opt/nova
+    create_home: yes
+
+- name: Create directory structure
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: nova
+    group: nova
+    mode: "0755"
+  loop:
+    - /opt/nova
+    - /opt/nova/cache
+    - /opt/nova/cache/tts
+    - /opt/nova/cache/greetings
+    - /opt/nova/logs
+    - /opt/nova/models/kokoro
+    - /opt/nova/assets/sounds
+
+- name: Set transcript log permissions
+  ansible.builtin.file:
+    path: /opt/nova/logs/transcripts.log
+    state: touch
+    owner: nova
+    group: nova
+    mode: "0600"
+
+- name: Install system dependencies
+  ansible.builtin.apt:
+    name:
+      - python3-venv
+      - python3-dev
+      - ffmpeg
+      - libsndfile1
+      - portaudio19-dev
+    state: present
+
+- name: Create Python virtualenv
+  ansible.builtin.command:
+    cmd: python3 -m venv /opt/nova/venv
+    creates: /opt/nova/venv/bin/python
+
+- name: Install Python dependencies
+  ansible.builtin.pip:
+    requirements: /opt/nova/requirements.txt
+    virtualenv: /opt/nova/venv
+
+- name: Download kokoro model (pinned by SHA256)
+  ansible.builtin.get_url:
+    url: "{{ kokoro_model_url }}"
+    dest: /opt/nova/models/kokoro/kokoro-v1.0.onnx
+    checksum: "sha256:{{ kokoro_model_sha256 }}"
+    owner: nova
+    group: nova
+    mode: "0644"
+
+- name: Download kokoro voices (pinned by SHA256)
+  ansible.builtin.get_url:
+    url: "{{ kokoro_voices_url }}"
+    dest: /opt/nova/models/kokoro/voices-v1.0.bin
+    checksum: "sha256:{{ kokoro_voices_sha256 }}"
+    owner: nova
+    group: nova
+    mode: "0644"
+
+- name: Deploy config.yaml
+  ansible.builtin.template:
+    src: config.yaml.j2
+    dest: /opt/nova/config.yaml
+    owner: nova
+    group: nova
+    mode: "0640"
+
+- name: Deploy systemd unit
+  ansible.builtin.copy:
+    src: nova-voice.service
+    dest: /etc/systemd/system/nova-voice.service
+    mode: "0644"
+  notify: Reload systemd
+
+- name: Generate greeting bank
+  ansible.builtin.command:
+    cmd: /opt/nova/venv/bin/python -m nova_speech.cli generate-greetings --config /opt/nova/config.yaml
+  become_user: nova
+  when: greeting_bank_generate | default(true)
+
+- name: Enable and start nova-voice
+  ansible.builtin.systemd:
+    name: nova-voice
+    enabled: yes
+    state: started
+    daemon_reload: yes
+
+handlers:
+  - name: Reload systemd
+    ansible.builtin.systemd:
+      daemon_reload: yes

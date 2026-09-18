@@ -1,0 +1,15 @@
+:root {
+  --nova-bg: #030913;
+  --nova-panel: rgba(6, 18, 33, .82);
+  --nova-line: rgba(92, 223, 255, .26);
+  --nova-ink: #ebf7ff;
+  --nova-muted: #9ab7cf;
+  --nova-accent: #5cdfff;
+}
+.nova-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.nova-nav a { color: var(--nova-muted); text-decoration: none; font: 500 12px "Space Grotesk", sans-serif; padding: 9px 12px; border-bottom: 2px solid transparent; border-radius: 3px 3px 0 0; letter-spacing: 0; }
+.nova-nav a:hover { color: var(--nova-ink); background: rgba(92, 223, 255, .08); }
+.nova-nav a[aria-current="page"] { color: var(--nova-accent); border-color: var(--nova-accent); background: rgba(92, 223, 255, .06); }
+.nova-nav a:focus-visible { outline: 2px solid var(--nova-accent); outline-offset: 2px; }
+.brand-block .nova-nav { margin-top: 16px; }
+.chat-header .nova-nav { margin-top: 8px; }

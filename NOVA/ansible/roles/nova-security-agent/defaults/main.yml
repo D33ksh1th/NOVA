@@ -1,0 +1,16 @@
+nova_agent_version: "0.4.0"
+nova_agent_user: "nova"
+nova_agent_group: "nova"
+nova_agent_install_root: "/opt/nova"
+nova_agent_service_name: "nova-security-agent"
+scan_profile: "it_full"
+
+nova_security_env:
+  NOVA_SECURITY_PUSH_ENABLED: "true"
+  NOVA_SECURITY_PULL_ENABLED: "false"
+  NOVA_SECURITY_DISCOVERY: "false"
+  NOVA_SECURITY_URL: "https://127.0.0.1:8000"
+  NOVA_SECURITY_CA_BUNDLE: "/etc/nova/ca-bundle.pem"
+  SCAN_ALLOW_CIDRS: ""
+  SCAN_DENY_CIDRS: ""
+  ZONE_MAP: ""

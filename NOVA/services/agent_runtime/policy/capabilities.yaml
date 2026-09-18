@@ -1,0 +1,19 @@
+# Agent capability grants — deny by default (Constitution I2, I14).
+#
+# Loaded once at startup, never mutated at runtime, never negotiable by an LLM.
+# Every capability listed here MUST be provided by at least one tool in
+# allowed_tools (I14); the AgentRegistry fails fast otherwise.
+
+research_agent:
+  max_risk: READ_ONLY
+  capabilities: [web.search]          # exactly one, backed by web_search_tool
+  allowed_tools: [web_search_tool]
+  denied_tools: ["*"]                 # explicit: everything not listed above
+  resource_scopes: {}                 # web.search needs no scope in Phase 1
+  concurrency_limit: 2
+  default_budget:
+    wall_clock_ms: 120000
+    max_tool_calls: 12
+    max_llm_tokens: 40000
+    max_usd: 0.50
+    max_retries: 2

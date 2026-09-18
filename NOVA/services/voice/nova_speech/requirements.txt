@@ -1,0 +1,36 @@
+# NOVA Speech Layer — Dependencies
+# Fully local, no cloud services
+
+# Core audio
+sounddevice>=0.4.6
+soundfile>=0.12.1
+numpy>=1.24
+
+# Wake word
+openwakeword>=0.6.0
+
+# VAD
+torch>=2.0
+torchaudio>=2.0
+
+# STT
+faster-whisper>=1.0.0
+
+# TTS
+kokoro-onnx>=0.4.7
+onnxruntime>=1.16
+
+# Audio FX
+pedalboard>=0.9.0
+
+# LLM response validation
+pydantic>=2.0
+
+# Config
+pyyaml>=6.0
+
+# WebSocket transport
+websockets>=12.0
+
+# CLI
+argparse

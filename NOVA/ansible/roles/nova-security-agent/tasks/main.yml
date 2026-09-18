@@ -1,0 +1,64 @@
+- name: Ensure nova group exists
+  ansible.builtin.group:
+    name: "{{ nova_agent_group }}"
+    state: present
+
+- name: Ensure nova user exists
+  ansible.builtin.user:
+    name: "{{ nova_agent_user }}"
+    group: "{{ nova_agent_group }}"
+    shell: /usr/sbin/nologin
+    create_home: false
+    state: present
+
+- name: Ensure nova directories exist
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ nova_agent_user }}"
+    group: "{{ nova_agent_group }}"
+    mode: "0750"
+  loop:
+    - /etc/nova
+    - /var/lib/nova
+    - /var/log/nova
+
+- name: Validate scan allow CIDRs in check mode
+  ansible.builtin.assert:
+    that:
+      - nova_security_env.SCAN_ALLOW_CIDRS is defined
+      - (nova_security_env.SCAN_ALLOW_CIDRS | trim | length) > 0
+    fail_msg: "SCAN_ALLOW_CIDRS is required before enabling discovery."
+
+- name: Render security agent environment file
+  ansible.builtin.copy:
+    dest: /etc/nova/security-agent.env
+    owner: root
+    group: root
+    mode: "0640"
+    content: |
+      {% for key, value in nova_security_env.items() %}
+      {{ key }}={{ value }}
+      {% endfor %}
+
+- name: Install hardened systemd unit
+  ansible.builtin.template:
+    src: nova-security-agent.service.j2
+    dest: "/etc/systemd/system/{{ nova_agent_service_name }}.service"
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - Reload systemd
+    - Restart nova security agent
+
+- name: Ensure service enabled and started
+  ansible.builtin.systemd:
+    name: "{{ nova_agent_service_name }}"
+    enabled: true
+    state: started
+
+- name: Check mode note for Vault-managed secrets
+  ansible.builtin.debug:
+    msg: "Token/signing key material must be injected from Vault before production start."
+  when: ansible_check_mode
