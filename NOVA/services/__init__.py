@@ -1,3 +1,0 @@
-"""
-NOVA Services Package
-"""
